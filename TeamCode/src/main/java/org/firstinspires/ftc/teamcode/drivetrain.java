@@ -77,7 +77,7 @@ public class drivetrain extends LinearOpMode {
 
             // Normalize motor powers if any exceed 1.0
             double maxval = max(abs(p1), max(abs(p2), max(abs(p3), abs(p4))));
-            if (maxval > 1.0) {
+            if (maxval > 0.8) {
                 p1 /= maxval;
                 p2 /= maxval;
                 p3 /= maxval;
