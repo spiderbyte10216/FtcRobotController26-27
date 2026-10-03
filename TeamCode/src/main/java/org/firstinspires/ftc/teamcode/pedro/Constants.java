@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.pedro;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
+import com.pedropathing.revhub.localizers.RevHubIMU;
 import com.pedropathing.revhub.localizers.ThreeWheelIMUConfig;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -27,24 +28,47 @@ public class Constants {
 
         c.manualBrakeMode.set(true);
     });
+
     public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
         c.leftEncoderName.set("lf");
         c.rightEncoderName.set("rr");
         c.strafeEncoderName.set("lr");
         c.imuName.set("imu");
-        c.imuOrientation.set(new RevHubOrientationOnRobot(
+        c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
-        ));
-        c.leftPodY.set(6.589475688432516);
-        c.rightPodY.set(-7.362825210595813);
-        c.strafePodX.set(-0.25012948008333824);
-        c.forwardTicksToInches.set(0.0020112162065275617);
-        c.strafeTicksToInches.set(0.0027204940249109678);
-        c.turnTicksToRadians.set(0.002241954171401);
+        )));
+        c.leftPodY.set(6.558513086399475);
+        c.rightPodY.set(-5.308832128876286);
+        c.strafePodX.set(-1.075615918320621);
+        c.forwardTicksToInches.set(0.0019368468255974002);
+        c.strafeTicksToInches.set(0.06820024475333286);
+        c.turnTicksToRadians.set(0.0019102018468515108);
         c.leftEncoderDirection.set(Encoder.REVERSE);
-        c.rightEncoderDirection.set(Encoder.REVERSE);
-        c.strafeEncoderDirection.set(Encoder.REVERSE);
+        c.rightEncoderDirection.set(Encoder.FORWARD);
+        c.strafeEncoderDirection.set(Encoder.FORWARD);
     });
 
+   /* public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
+        c.leftEncoderName.set("lf");
+        c.rightEncoderName.set("rr");
+        c.strafeEncoderName.set("lr");
+        c.imuName.set("imu");
+        c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+        )));
+        c.leftPodY.set(-1782.7163986190014);
+        c.rightPodY.set(-1268.824034837032);
+        c.strafePodX.set(-365.95632776366193);
+        c.forwardTicksToInches.set(0.45020649046105493);
+        c.strafeTicksToInches.set(0.0019559666503648912);
+        c.turnTicksToRadians.set(1.1091999139768665);
+        c.leftEncoderDirection.set(Encoder.FORWARD);
+        c.rightEncoderDirection.set(Encoder.REVERSE);
+        c.strafeEncoderDirection.set(Encoder.FORWARD);
+    }); */
+
+
 }
+
