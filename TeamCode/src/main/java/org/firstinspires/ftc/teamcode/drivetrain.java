@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.pedropathing.revhub.localizers.Encoder;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -16,6 +17,7 @@ public class drivetrain extends LinearOpMode {
     private DcMotor leftFront;
     private DcMotor rightBack;
     private DcMotor leftBack;
+
     private ElapsedTime runtime = new ElapsedTime();
     public FtcDashboard ftcDashboard;
 
@@ -26,20 +28,21 @@ public class drivetrain extends LinearOpMode {
         telemetry.addData( "Status", "Initializing");
         telemetry.update();
 
-        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
-        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
-        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-        leftBack = hardwareMap.get(DcMotor.class,"leftBack");
+        rightFront = hardwareMap.get(DcMotor.class, "rf");
+        leftFront = hardwareMap.get(DcMotor.class, "lf");
+        rightBack = hardwareMap.get(DcMotor.class, "rr");
+        leftBack = hardwareMap.get(DcMotor.class,"lr");
+
 
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         telemetry.addData("Status","Initializing");
         telemetry.update();
@@ -47,10 +50,12 @@ public class drivetrain extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        double y = gamepad1.left_stick_y;
-        double x = gamepad1.left_stick_x;
-        double r = gamepad1.right_stick_x;
+
         while(opModeIsActive()) {
+            double y = gamepad1.left_stick_y;
+            double x = gamepad1.left_stick_x;
+            double r = gamepad1.right_stick_x;
+
             double p1 = y + x + r;
             double p2 = y - x - r;
             double p3 = y - x + r;
@@ -68,6 +73,15 @@ public class drivetrain extends LinearOpMode {
             rightFront.setPower(p2);
             leftBack.setPower(p3);
             rightBack.setPower(p4);
+
+            int leftPosition = leftFront.getCurrentPosition();
+            int rightPosition = rightBack.getCurrentPosition();
+            int strafePosition = leftBack.getCurrentPosition();
+
+            telemetry.addData("Left Encoder (ticks)", leftPosition);
+            telemetry.addData("Right Encoder (ticks)", rightPosition);
+            telemetry.addData("Strafe Encoder (ticks)", strafePosition);
+
 
             telemetry.update();
         }
