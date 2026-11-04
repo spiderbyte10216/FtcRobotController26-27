@@ -22,19 +22,20 @@ public class Tuning {
 
     @Tuner
     public static Procedure tests() {
-        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.drivetrainConfig), (hardwareMap -> new ThreeWheelLocalizer(hardwareMap, Constants.localizerConfig)), null);
+        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.drivetrainConfig), (hardwareMap -> new ThreeWheelIMULocalizer(hardwareMap, Constants.localizerConfig)), null);
         //return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.drivetrainConfig), null, null);
     }
 
 
     @Tuner
-    public static Procedure threeWheelTuner() {
-        return new ThreeWheelTuner();
+    public static Procedure threeWheelIMUTuner() {
+        return new ThreeWheelIMUTuner();
     }
 
 
     @Tuner
     public static Procedure foresightTuner() {
-        return new ForesightTuner((hardwareMap) -> new ThreeWheelLocalizer(hardwareMap, Constants.localizerConfig), (hardwareMap) -> new Mecanum(hardwareMap, Constants.drivetrainConfig));
+        return new ForesightTuner((hardwareMap) -> new ThreeWheelIMULocalizer(hardwareMap, Constants.localizerConfig), (hardwareMap) -> new Mecanum(hardwareMap, Constants.drivetrainConfig));
     }
+
 }

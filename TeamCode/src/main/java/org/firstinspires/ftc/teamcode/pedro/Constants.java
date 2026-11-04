@@ -30,6 +30,50 @@ public class Constants {
         c.manualBrakeMode.set(true);
     });
 
+    //good values + even weight distribution
+    public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
+        c.leftEncoderName.set("lf");
+        c.rightEncoderName.set("rr");
+        c.strafeEncoderName.set("lr");
+        c.imuName.set("imu");
+        c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+        )));
+        c.leftPodY.set(8.746833655874783);
+        c.rightPodY.set(-10.143720604525717);
+        c.strafePodX.set(-0.6802080127863884);
+        c.forwardTicksToInches.set(0.003198578553773503);
+        c.strafeTicksToInches.set(0.0026162002839768294);
+        c.turnTicksToRadians.set(0.003020404941176861);
+        c.leftEncoderDirection.set(Encoder.REVERSE);
+        c.rightEncoderDirection.set(Encoder.REVERSE);
+        c.strafeEncoderDirection.set(Encoder.FORWARD);
+    });
+
+    /*
+    public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
+        c.leftEncoderName.set("lf");
+        c.rightEncoderName.set("rr");
+        c.strafeEncoderName.set("lr");
+        c.imuName.set("imu");
+        c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+        )));
+        c.leftPodY.set(5.538803124653105);
+        c.rightPodY.set(-6.061933574113529);
+        c.strafePodX.set(0.5714531570594193);
+        c.forwardTicksToInches.set(0.0020042228986512697);
+        c.strafeTicksToInches.set(0.1296000559710841);
+        c.turnTicksToRadians.set(0.0018661881913602644);
+        c.leftEncoderDirection.set(Encoder.REVERSE);
+        c.rightEncoderDirection.set(Encoder.REVERSE);
+        c.strafeEncoderDirection.set(Encoder.FORWARD);
+    });
+    */
+
+/*
     public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(c -> {
         c.leftEncoderName.set("lf");
         c.rightEncoderName.set("rr");
@@ -45,6 +89,7 @@ public class Constants {
         c.strafeEncoderDirection.set(Encoder.REVERSE);
     });
 
+*/
     /*
     public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
         c.leftEncoderName.set("lf");
